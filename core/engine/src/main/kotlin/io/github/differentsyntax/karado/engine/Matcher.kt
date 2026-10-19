@@ -1,5 +1,6 @@
 package io.github.differentsyntax.karado.engine
 
+import io.github.differentsyntax.karado.recipes.Anchor
 import io.github.differentsyntax.karado.recipes.Role
 import io.github.differentsyntax.karado.recipes.Target
 import java.text.Normalizer
@@ -50,10 +51,48 @@ object Matcher {
         return if (close.isEmpty()) MatchResult.Found(top, topScore) else MatchResult.Ambiguous(listOf(top) + close)
     }
 
-    fun anyScrollable(screen: Screen): Boolean {
-        var found = false
-        walk(screen.root, emptyList()) { node, _ -> if (node.scrollable) found = true }
-        return found
+    enum class ScrollWay { DOWN, UP, NONE }
+
+    /**
+     * Which way the person could still scroll. A list already at its end offers no
+     * forward scroll, so we stop asking them to scroll down a list that can't move.
+     */
+    fun scrollWay(screen: Screen): ScrollWay {
+        var forward = false
+        var backward = false
+        walk(screen.root, emptyList()) { node, _ ->
+            forward = forward || node.scrollForward
+            backward = backward || node.scrollBackward
+        }
+        return when {
+            forward -> ScrollWay.DOWN
+            backward -> ScrollWay.UP
+            else -> ScrollWay.NONE
+        }
+    }
+
+    /** True when at least [Anchor.atLeast] of the anchor's labels are on screen, matched exactly. */
+    fun isOn(screen: Screen, anchor: Anchor): Boolean {
+        val wanted = anchor.text.map(::normalize).toSet()
+        val seen = mutableSetOf<String>()
+        walk(screen.root, emptyList()) { node, _ ->
+            if (node.password || node.bounds.isEmpty) return@walk
+            listOfNotNull(node.text, node.contentDescription).map(::normalize).filter { it in wanted }.forEach(seen::add)
+        }
+        return seen.size >= anchor.atLeast
+    }
+
+    /** Labels Android and common phone brands give the ← arrow at the top of a page. */
+    private val backTarget = Target(
+        text = listOf("Navigate up", "Back", "पीछे जाएं", "पीछे जाएँ", "ऊपर नेविगेट करें", "वापस जाएं"),
+        role = Role.CLICKABLE,
+    )
+
+    /** The on-screen ← arrow, if the app shows one. */
+    fun backButton(screen: Screen): UiNode? = when (val m = find(screen, backTarget, threshold = EXACT)) {
+        is MatchResult.Found -> m.node
+        is MatchResult.Ambiguous -> m.candidates.first()
+        MatchResult.NotFound -> null
     }
 
     private fun score(node: UiNode, target: Target, ancestors: List<UiNode>): Int {

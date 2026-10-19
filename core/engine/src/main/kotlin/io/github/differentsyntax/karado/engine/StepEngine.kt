@@ -14,8 +14,11 @@ sealed interface Guidance {
     /** Ring the node and say [say]. [waitingForDone] shows the "हो गया" button. */
     data class Highlight(val step: Int, val node: UiNode, val say: Localized, val waitingForDone: Boolean) : Guidance
 
-    /** Target probably exists further down the list. */
+    /** Target probably exists further along the list (or, on the home screen, in all apps). */
     data class Scroll(val step: Int, val say: Localized) : Guidance
+
+    /** The app opened on a different page than this step needs: ring the ← arrow if there is one. */
+    data class Back(val step: Int, val node: UiNode?, val say: Localized) : Guidance
 
     /** Two similar buttons: ring both and ask which one the person sees. */
     data class Choose(val step: Int, val nodes: List<UiNode>, val say: Localized) : Guidance
@@ -31,6 +34,19 @@ sealed interface Guidance {
 
 object Messages {
     val scroll = Localized("Scroll down a little", "नीचे scroll करिए")
+    val scrollUp = Localized("Scroll up a little", "ऊपर scroll करिए")
+    val allApps = Localized(
+        "Can't see it? Swipe up from the bottom of the screen to see all apps.",
+        "नहीं दिख रहा? screen पर नीचे से ऊपर swipe करिए, सारे apps दिख जाएँगे।",
+    )
+    val backArrow = Localized(
+        "This is a different page. Tap the back arrow ← at the top.",
+        "यह कोई और page खुला है। ऊपर ← वाले तीर पर tap करिए।",
+    )
+    val backButton = Localized(
+        "This is a different page. Press the Back button.",
+        "यह कोई और page खुला है। Back button दबाइए।",
+    )
     val lost = Localized(
         "Looks like we are on a different screen. Tap the Back button.",
         "लगता है हम दूसरी screen पर हैं। Back button दबाइए।",
@@ -51,6 +67,8 @@ class StepEngine(
     recipe: Recipe,
     val mode: Mode,
     private val brand: String?,
+    /** The launcher's package, so we can tell the home screen apart from the app. */
+    private val homePackage: String? = null,
 ) {
     private val steps: List<Step> = when (mode) {
         Mode.ROUTE -> recipe.route
@@ -84,7 +102,35 @@ class StepEngine(
             }
         }
 
-        return if (Matcher.anyScrollable(screen)) Guidance.Scroll(current, Messages.scroll) else Guidance.Lost(current, Messages.lost)
+        return notFound(step, screen)
+    }
+
+    private fun notFound(step: Step, screen: Screen): Guidance {
+        if (screen.packageName == homePackage) {
+            // Back on the home screen mid-guide: start again from the step that opens the app.
+            for (i in 0 until current) {
+                val m = Matcher.find(screen, steps[i].targetFor(brand))
+                if (m is MatchResult.Found) {
+                    current = i
+                    return highlight(i, m.node)
+                }
+            }
+            // Many home screens (Pixel among them) keep apps like Settings only in the all-apps list.
+            return Guidance.Scroll(current, Messages.allApps)
+        }
+
+        // Apps reopen on the last page the person saw. Scrolling won't help there; Back will.
+        val anchor = step.onScreen
+        if (anchor != null && !Matcher.isOn(screen, anchor)) {
+            val arrow = Matcher.backButton(screen)
+            return Guidance.Back(current, arrow, if (arrow != null) Messages.backArrow else Messages.backButton)
+        }
+
+        return when (Matcher.scrollWay(screen)) {
+            Matcher.ScrollWay.DOWN -> Guidance.Scroll(current, Messages.scroll)
+            Matcher.ScrollWay.UP -> Guidance.Scroll(current, Messages.scrollUp)
+            Matcher.ScrollWay.NONE -> Guidance.Lost(current, Messages.lost)
+        }
     }
 
     /** The person tapped "हो गया" on a step that waits for them. */

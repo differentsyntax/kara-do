@@ -44,7 +44,19 @@ data class Step(
     val target: Target,
     /** Brand-specific overrides keyed by lowercase Build.MANUFACTURER, e.g. "samsung". */
     val variants: Map<String, Target> = emptyMap(),
+    /**
+     * The screen this step happens on. Apps such as Settings reopen on the last page the
+     * person saw, so if this isn't on screen the guide teaches Back instead of Scroll.
+     */
+    @SerialName("on_screen") val onScreen: Anchor? = null,
     @SerialName("done_when") val doneWhen: DoneWhen,
+)
+
+/** Labels that identify a screen. At least [atLeast] of them must be visible (exact match). */
+@Serializable
+data class Anchor(
+    val text: List<String>,
+    @SerialName("at_least") val atLeast: Int = 1,
 )
 
 enum class Role { CLICKABLE, SWITCH, SLIDER, EDITABLE }

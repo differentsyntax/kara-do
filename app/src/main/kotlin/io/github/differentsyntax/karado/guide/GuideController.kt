@@ -41,7 +41,7 @@ object GuideController {
     fun start(context: Context, recipe: Recipe, mode: Mode): Boolean {
         val s = service ?: return false
         val launcher = homePackage(context)
-        engine = StepEngine(recipe, mode, brand = Build.MANUFACTURER?.lowercase())
+        engine = StepEngine(recipe, mode, brand = Build.MANUFACTURER?.lowercase(), homePackage = launcher)
         allowedPackages = setOfNotNull(recipe.app, launcher.takeIf { mode == Mode.ROUTE })
         s.allowPackages(allowedPackages)
 

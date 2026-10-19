@@ -12,6 +12,7 @@
    {
     "class": "androidx.recyclerview.widget.RecyclerView",
     "scrollable": true,
+    "scroll_forward": true,
     "bounds": {
      "left": 0,
      "top": 300,

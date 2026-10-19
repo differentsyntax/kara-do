@@ -25,6 +25,9 @@ data class UiNode(
     val checkable: Boolean = false,
     val editable: Boolean = false,
     val scrollable: Boolean = false,
+    /** The node offers scroll forward/backward right now (false at the end of a list). */
+    @SerialName("scroll_forward") val scrollForward: Boolean = false,
+    @SerialName("scroll_backward") val scrollBackward: Boolean = false,
     /** True when the node reports a RangeInfo (sliders, seek bars). */
     val range: Boolean = false,
     val password: Boolean = false,
