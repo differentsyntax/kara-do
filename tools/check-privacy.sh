@@ -27,13 +27,15 @@ for p in $perms; do
   fi
 done
 
+# Strip XML comments first: the config's own comment names these on purpose.
+config_xml="$(perl -0pe 's/<!--.*?-->//gs' "$config")"
 for attr in canPerformGestures canRequestFilterKeyEvents canRequestTouchExplorationMode canTakeScreenshot flagRequestTouchExplorationMode flagRequestFilterKeyEvents; do
-  if grep -q "$attr" "$config"; then
+  if grep -q "$attr" <<<"$config_xml"; then
     echo "::error::$config must stay read-only but contains $attr"
     fail=1
   fi
 done
-if ! grep -q 'android:packageNames=' "$config"; then
+if ! grep -q 'android:packageNames=' <<<"$config_xml"; then
   echo "::error::$config must restrict packageNames so no app is watched until a guide starts"
   fail=1
 fi

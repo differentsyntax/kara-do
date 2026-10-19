@@ -23,8 +23,8 @@ internal class Speaker(context: Context) : TextToSpeech.OnInitListener {
             return
         }
         tts.language = when (lang) {
-            Lang.HI -> Locale("hi", "IN")
-            Lang.EN -> Locale("en", "IN")
+            Lang.HI -> Locale.forLanguageTag("hi-IN")
+            Lang.EN -> Locale.forLanguageTag("en-IN")
         }
         tts.setSpeechRate(0.85f) // a little slower than default for older listeners
         tts.speak(text, TextToSpeech.QUEUE_FLUSH, null, "kara-do-step")
