@@ -113,4 +113,59 @@ class StepEngineTest {
         assertNull(engine.confirm())
         assertEquals(0, engine.current)
     }
+
+    @Test
+    fun `settings reopening on an old page teaches Back, not Scroll`() {
+        val engine = StepEngine(brightness, Mode.ROUTE, brand = "google")
+        // Settings remembered the Network & internet page from last time.
+        val g = engine.onScreen(screen("google-pixel-synthetic", "02b-settings-old-page"))
+        assertIs<Guidance.Back>(g)
+        assertEquals(1, g.step)
+        assertEquals("Navigate up", g.node?.contentDescription)
+        assertEquals(Messages.backArrow, g.say)
+        // After Back, the Settings home page asks to scroll as before.
+        assertIs<Guidance.Scroll>(engine.onScreen(screen("google-pixel-synthetic", "02-settings-top")))
+    }
+
+    @Test
+    fun `a list already at its end asks to scroll up, and a list that cannot move is lost`() {
+        val engine = StepEngine(brightness, Mode.ROUTE, brand = "google")
+        fun settingsRoot(forward: Boolean, backward: Boolean) = Screen("com.android.settings", UiNode(
+            bounds = Bounds(0, 0, 1080, 2400),
+            children = listOf(UiNode(
+                scrollable = true, scrollForward = forward, scrollBackward = backward,
+                bounds = Bounds(0, 300, 1080, 2400),
+                children = listOf("Location", "System", "About phone").mapIndexed { i, t ->
+                    UiNode(text = t, clickable = true, bounds = Bounds(0, 300 + i * 160, 1080, 460 + i * 160))
+                },
+            )),
+        ))
+        val up = engine.onScreen(settingsRoot(forward = false, backward = true))
+        assertIs<Guidance.Scroll>(up)
+        assertEquals(Messages.scrollUp, up.say)
+        assertIs<Guidance.Lost>(engine.onScreen(settingsRoot(forward = false, backward = false)))
+    }
+
+    @Test
+    fun `home screen without a Settings icon says to open all apps`() {
+        val launcher = "com.google.android.apps.nexuslauncher"
+        val engine = StepEngine(brightness, Mode.ROUTE, brand = "google", homePackage = launcher)
+        val home = Screen(launcher, UiNode(bounds = Bounds(0, 0, 1080, 2400), children = listOf(
+            UiNode(text = "Phone", clickable = true, bounds = Bounds(0, 2000, 200, 2200)),
+            UiNode(text = "Chrome", clickable = true, bounds = Bounds(220, 2000, 420, 2200)),
+        )))
+        val g = engine.onScreen(home)
+        assertIs<Guidance.Scroll>(g)
+        assertEquals(Messages.allApps, g.say)
+    }
+
+    @Test
+    fun `going home mid-guide points at Settings again`() {
+        val engine = StepEngine(brightness, Mode.ROUTE, brand = "google", homePackage = "com.google.android.apps.nexuslauncher")
+        engine.onScreen(screen("google-pixel-synthetic", "02-settings-top"))
+        assertEquals(1, engine.current)
+        val home = screen("google-pixel-synthetic", "01-home").copy(packageName = "com.google.android.apps.nexuslauncher")
+        assertEquals("Settings", engine.onScreen(home).label())
+        assertEquals(0, engine.current)
+    }
 }

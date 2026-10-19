@@ -14,6 +14,8 @@ import io.github.differentsyntax.karado.engine.UiNode
 internal object NodeSnapshot {
     private const val MAX_DEPTH = 40
     private const val MAX_NODES = 3000
+    private val SCROLL_FORWARD = AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_FORWARD.id
+    private val SCROLL_BACKWARD = AccessibilityNodeInfo.AccessibilityAction.ACTION_SCROLL_BACKWARD.id
 
     fun of(root: AccessibilityNodeInfo): UiNode {
         var budget = MAX_NODES
@@ -43,6 +45,8 @@ internal object NodeSnapshot {
                 checkable = node.isCheckable,
                 editable = node.isEditable,
                 scrollable = node.isScrollable,
+                scrollForward = node.actionList.any { it.id == SCROLL_FORWARD },
+                scrollBackward = node.actionList.any { it.id == SCROLL_BACKWARD },
                 range = node.rangeInfo != null,
                 password = password,
                 bounds = Bounds(rect.left, rect.top, rect.right, rect.bottom),

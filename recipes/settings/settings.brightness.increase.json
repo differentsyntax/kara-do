@@ -24,6 +24,17 @@
         "realme": { "text": ["Display & brightness"] },
         "google": { "text": ["Display & touch", "Display"] }
       },
+      "on_screen": {
+        "text": [
+          "Search Settings", "Search settings", "Network & internet", "Connected devices", "Connections",
+          "Apps", "Notifications", "Battery", "Storage", "Sound & vibration", "Sounds and vibration",
+          "Wallpaper & style", "Wallpaper", "Accessibility", "Security & privacy", "Location",
+          "Digital Wellbeing", "Google", "System", "About phone", "General management",
+          "नेटवर्क और इंटरनेट", "कनेक्ट किए गए डिवाइस", "ऐप्लिकेशन", "ऐप्स", "सूचनाएं", "बैटरी",
+          "स्टोरेज", "साउंड और वाइब्रेशन", "सुलभता", "जगह की जानकारी", "सिस्टम", "फ़ोन के बारे में"
+        ],
+        "at_least": 2
+      },
       "done_when": { "any_visible": { "text": ["Brightness level", "Brightness", "ब्राइटनेस"] } }
     },
     {

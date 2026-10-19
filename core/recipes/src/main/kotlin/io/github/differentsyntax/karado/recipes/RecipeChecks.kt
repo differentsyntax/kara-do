@@ -44,6 +44,9 @@ object RecipeChecks {
             for (t in targets) for (label in t.text) {
                 sensitiveRegex.find(label)?.let { add("$where targets sensitive label '$label'") }
             }
+            step.onScreen?.let { a ->
+                if (a.text.isEmpty() || a.atLeast !in 1..a.text.size) add("$where on_screen needs 1..${a.text.size} of its labels")
+            }
             if (step.doneWhen.packageIs == null && step.doneWhen.anyVisible == null && !step.doneWhen.userConfirms) {
                 add("$where has no done_when condition")
             }

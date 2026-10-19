@@ -20,6 +20,10 @@ class GuideService : AccessibilityService() {
     private lateinit var overlay: Overlay
     private lateinit var speaker: Speaker
     private var lastSaid: String? = null
+    private var lastShown: Guidance? = null
+
+    /** A "can't find it" answer waiting to be confirmed by a second look (see [render]). */
+    private var pendingMiss: Guidance? = null
 
     private val refresh = Runnable { readScreen() }
 
@@ -84,6 +88,8 @@ class GuideService : AccessibilityService() {
         overlay.hide()
         speaker.stop()
         lastSaid = null
+        lastShown = null
+        pendingMiss = null
     }
 
     private fun readScreen() {
@@ -99,12 +105,26 @@ class GuideService : AccessibilityService() {
     }
 
     private fun render(g: Guidance) {
+        // Screens pass through half-drawn states while they open or scroll. Don't swap a
+        // ring for "scroll"/"Back" on one look: check again shortly and only then change.
+        val isMiss = g is Guidance.Scroll || g is Guidance.Back || g is Guidance.Lost
+        if (isMiss && lastShown !is Guidance.Scroll && lastShown !is Guidance.Back && lastShown !is Guidance.Lost) {
+            if (pendingMiss == null || pendingMiss!!::class != g::class) {
+                pendingMiss = g
+                main.removeCallbacks(refresh)
+                main.postDelayed(refresh, MISS_CONFIRM_MS)
+                return
+            }
+        }
+        pendingMiss = null
+        lastShown = g
         val lang = GuideController.lang
         when (g) {
             is Guidance.Highlight -> show(g.say.get(lang), listOf(g.node.bounds), g.waitingForDone)
             is Guidance.Choose -> show(g.say.get(lang), g.nodes.map { it.bounds }, false)
             is Guidance.Scroll -> show(g.say.get(lang), emptyList(), false)
             is Guidance.Lost -> show(g.say.get(lang), emptyList(), false)
+            is Guidance.Back -> show(g.say.get(lang), listOfNotNull(g.node?.bounds), false)
             is Guidance.Stopped -> finish(g.say.get(lang))
             is Guidance.Finished -> finish(g.say.get(lang))
         }
@@ -122,5 +142,9 @@ class GuideService : AccessibilityService() {
             lastSaid = text
             speaker.say(text, GuideController.lang)
         }
+    }
+
+    private companion object {
+        const val MISS_CONFIRM_MS = 700L
     }
 }
