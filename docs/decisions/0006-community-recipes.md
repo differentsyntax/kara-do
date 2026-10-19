@@ -23,4 +23,4 @@ How it works:
   - privacy leaks in the snapshots, mitigated by redacting on the device and a contributor preview;
   - malicious or misleading recipes, mitigated by the review gate and the safety lint;
   - review workload, mitigated by automated checks first and trusted reviewers later.
-- *Licensing (to decide):* code under Apache-2.0, and recipe data under CC BY 4.0, with a simple DCO sign-off for contributions.
+- *Licensing (decided 2026-10-19):* code under Apache-2.0, and recipes and fixtures under CC BY 4.0, with a DCO sign-off for contributions. See [CONTRIBUTING.md](../../CONTRIBUTING.md).

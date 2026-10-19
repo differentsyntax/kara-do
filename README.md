@@ -20,3 +20,22 @@ This repo keeps a trail of the journey:
 - [`docs/research/`](docs/research/): research behind the decisions
 
 The website is published from `docs/` with GitHub Pages.
+
+## Project layout
+```
+core/recipes/   recipe format, loader and safety checks (pure Kotlin)
+core/engine/    step engine and screen matcher (pure Kotlin, most of the tests)
+app/            Android app: onboarding, read-only accessibility service, overlay, voice
+recipes/        task recipes (JSON) and test fixtures (UI trees per phone)
+tools/          check-privacy.sh, run in CI on every build
+docs/           website, devlog, decisions, design
+```
+
+## Building
+- Engine and recipe tests need only a JDK: `./gradlew :core:recipes:test :core:engine:test`
+- The Android app needs the Android SDK (set `ANDROID_HOME` or `sdk.dir` in `local.properties`): `./gradlew :app:assembleDebug`
+- To try it on an emulator, see [docs/testing.md](docs/testing.md). Every PR also uploads a debug APK.
+- CI runs both, then `tools/check-privacy.sh`, which fails if the APK gains the internet permission or the accessibility service gains any way to act on the phone.
+
+## Licence
+Code: [Apache-2.0](LICENSE). Recipes and fixtures: [CC BY 4.0](recipes/LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md).

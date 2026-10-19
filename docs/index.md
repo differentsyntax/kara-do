@@ -16,4 +16,4 @@ Step-by-step phone help in Hindi and English for people who didn't grow up with 
 - [Research](research/existing-tools.md)
 - [System design (draft)](design/system-design.md) · [MVP tasks](design/mvp-tasks.md)
 
-**Latest:** [18 Oct 2026: the idea, the research, and the first decisions](devlog/2026-10-18.md)
+**Latest:** [19 Oct 2026: Day 1, the first skeleton](devlog/2026-10-19.md)

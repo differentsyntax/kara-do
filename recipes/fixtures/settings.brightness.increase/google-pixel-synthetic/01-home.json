@@ -1,0 +1,109 @@
+{
+ "package": "com.google.android.apps.nexuslauncher",
+ "root": {
+  "class": "android.widget.FrameLayout",
+  "bounds": {
+   "left": 0,
+   "top": 0,
+   "right": 1080,
+   "bottom": 2400
+  },
+  "children": [
+   {
+    "class": "android.view.ViewGroup",
+    "bounds": {
+     "left": 0,
+     "top": 0,
+     "right": 1080,
+     "bottom": 2400
+    },
+    "children": [
+     {
+      "text": "Phone",
+      "desc": "Phone",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 60,
+       "top": 1600,
+       "right": 280,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "Messages",
+      "desc": "Messages",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 310,
+       "top": 1600,
+       "right": 530,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "Chrome",
+      "desc": "Chrome",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 560,
+       "top": 1600,
+       "right": 780,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "YouTube",
+      "desc": "YouTube",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 810,
+       "top": 1600,
+       "right": 1030,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "WhatsApp",
+      "desc": "WhatsApp",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 60,
+       "top": 1900,
+       "right": 280,
+       "bottom": 2180
+      }
+     },
+     {
+      "text": "Photos",
+      "desc": "Photos",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 310,
+       "top": 1900,
+       "right": 530,
+       "bottom": 2180
+      }
+     },
+     {
+      "text": "Settings",
+      "desc": "Settings",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 560,
+       "top": 1900,
+       "right": 780,
+       "bottom": 2180
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

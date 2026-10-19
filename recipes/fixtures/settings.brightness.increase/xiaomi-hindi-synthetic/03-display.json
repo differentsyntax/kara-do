@@ -1,0 +1,81 @@
+{
+ "package": "com.android.settings",
+ "root": {
+  "class": "android.widget.FrameLayout",
+  "bounds": {
+   "left": 0,
+   "top": 0,
+   "right": 1080,
+   "bottom": 2400
+  },
+  "children": [
+   {
+    "class": "androidx.recyclerview.widget.RecyclerView",
+    "scrollable": true,
+    "bounds": {
+     "left": 0,
+     "top": 300,
+     "right": 1080,
+     "bottom": 2400
+    },
+    "children": [
+     {
+      "class": "android.widget.LinearLayout",
+      "bounds": {
+       "left": 0,
+       "top": 320,
+       "right": 1080,
+       "bottom": 580
+      },
+      "children": [
+       {
+        "text": "ब्राइटनेस",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 60,
+         "top": 340,
+         "right": 1000,
+         "bottom": 400
+        }
+       },
+       {
+        "class": "android.widget.SeekBar",
+        "range": true,
+        "clickable": true,
+        "bounds": {
+         "left": 60,
+         "top": 440,
+         "right": 1020,
+         "bottom": 540
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 640,
+       "right": 1080,
+       "bottom": 820
+      },
+      "children": [
+       {
+        "text": "डार्क मोड",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 670,
+         "right": 1000,
+         "bottom": 730
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
