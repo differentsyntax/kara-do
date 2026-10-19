@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Kara Do</string>
+    <string name="service_label">Kara Do guide</string>
+    <string name="service_description">Kara Do looks at the screen only while a guide is running, and only in the app being guided, to show you where to tap. It never taps for you, never reads password fields, and has no internet access, so nothing can leave your phone.</string>
+</resources>

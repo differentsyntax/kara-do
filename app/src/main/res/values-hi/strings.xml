@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">करा दो</string>
+    <string name="service_label">करा दो guide</string>
+    <string name="service_description">करा दो सिर्फ़ guide चलते समय, और सिर्फ़ उसी app में, screen देखता है ताकि बता सके कहाँ tap करना है। यह खुद कभी tap नहीं करता, password कभी नहीं पढ़ता, और इसमें internet नहीं है, इसलिए आपके phone से कुछ बाहर नहीं जा सकता।</string>
+</resources>

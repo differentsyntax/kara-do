@@ -1,0 +1,54 @@
+{
+  "id": "settings.brightness.increase",
+  "title": { "en": "Make the screen brighter", "hi": "screen की Brightness बढ़ाइए" },
+  "app": "com.android.settings",
+  "route": [
+    {
+      "id": "open_settings",
+      "say": { "en": "On the home screen, tap the Settings app", "hi": "Home screen पर Settings app पर tap करिए" },
+      "target": { "text": ["Settings", "सेटिंग्स", "सेटिंग"], "role": "CLICKABLE" },
+      "done_when": { "package_is": "com.android.settings" }
+    },
+    {
+      "id": "open_display",
+      "say": { "en": "Tap Display", "hi": "Display वाले option पर tap करिए" },
+      "target": {
+        "text": ["Display", "Display & brightness", "Display and brightness", "Display & touch", "डिस्प्ले"],
+        "role": "CLICKABLE"
+      },
+      "variants": {
+        "samsung": { "text": ["Display"] },
+        "xiaomi": { "text": ["Display & brightness", "Display"] },
+        "vivo": { "text": ["Display and brightness"] },
+        "oppo": { "text": ["Display & brightness"] },
+        "realme": { "text": ["Display & brightness"] },
+        "google": { "text": ["Display & touch", "Display"] }
+      },
+      "done_when": { "any_visible": { "text": ["Brightness level", "Brightness", "ब्राइटनेस"] } }
+    },
+    {
+      "id": "move_slider",
+      "say": {
+        "en": "Slide the bar to the right. When it looks good, tap Done.",
+        "hi": "bar को दाईं तरफ़ slide करिए। ठीक लगे तो 'हो गया' दबाइए।"
+      },
+      "target": { "text": ["Brightness level", "Brightness", "ब्राइटनेस"], "role": "SLIDER" },
+      "done_when": { "user_confirms": true }
+    }
+  ],
+  "shortcut": {
+    "action": "android.settings.DISPLAY_SETTINGS",
+    "steps": [
+      {
+        "id": "move_slider",
+        "say": {
+          "en": "Slide the bar to the right. When it looks good, tap Done.",
+          "hi": "bar को दाईं तरफ़ slide करिए। ठीक लगे तो 'हो गया' दबाइए।"
+        },
+        "target": { "text": ["Brightness level", "Brightness", "ब्राइटनेस"], "role": "SLIDER" },
+        "done_when": { "user_confirms": true }
+      }
+    ]
+  },
+  "tested_on": []
+}

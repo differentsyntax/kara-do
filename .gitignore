@@ -5,3 +5,8 @@
 local.properties
 secrets.*
 .DS_Store
+.gradle/
+build/
+.idea/
+*.iml
+.kotlin/

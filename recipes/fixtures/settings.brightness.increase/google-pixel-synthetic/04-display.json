@@ -1,0 +1,136 @@
+{
+ "package": "com.android.settings",
+ "root": {
+  "class": "android.widget.FrameLayout",
+  "bounds": {
+   "left": 0,
+   "top": 0,
+   "right": 1080,
+   "bottom": 2400
+  },
+  "children": [
+   {
+    "text": "Display & touch",
+    "class": "android.widget.TextView",
+    "bounds": {
+     "left": 60,
+     "top": 150,
+     "right": 1020,
+     "bottom": 270
+    }
+   },
+   {
+    "class": "androidx.recyclerview.widget.RecyclerView",
+    "scrollable": true,
+    "bounds": {
+     "left": 0,
+     "top": 300,
+     "right": 1080,
+     "bottom": 2400
+    },
+    "children": [
+     {
+      "class": "android.widget.LinearLayout",
+      "bounds": {
+       "left": 0,
+       "top": 320,
+       "right": 1080,
+       "bottom": 580
+      },
+      "children": [
+       {
+        "text": "Brightness level",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 60,
+         "top": 340,
+         "right": 1000,
+         "bottom": 400
+        }
+       },
+       {
+        "class": "android.widget.SeekBar",
+        "range": true,
+        "clickable": true,
+        "bounds": {
+         "left": 60,
+         "top": 440,
+         "right": 1020,
+         "bottom": 540
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 600,
+       "right": 1080,
+       "bottom": 780
+      },
+      "children": [
+       {
+        "text": "Adaptive brightness",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 630,
+         "right": 1000,
+         "bottom": 690
+        }
+       },
+       {
+        "text": "Automatically adjust screen brightness",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 695,
+         "right": 1000,
+         "bottom": 750
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 780,
+       "right": 1080,
+       "bottom": 960
+      },
+      "children": [
+       {
+        "text": "Dark theme",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 810,
+         "right": 1000,
+         "bottom": 870
+        }
+       },
+       {
+        "text": "Will never turn on automatically",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 875,
+         "right": 1000,
+         "bottom": 930
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}

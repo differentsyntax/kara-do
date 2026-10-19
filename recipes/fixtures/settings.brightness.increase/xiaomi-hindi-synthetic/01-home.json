@@ -1,0 +1,85 @@
+{
+ "package": "com.miui.home",
+ "root": {
+  "class": "android.widget.FrameLayout",
+  "bounds": {
+   "left": 0,
+   "top": 0,
+   "right": 1080,
+   "bottom": 2400
+  },
+  "children": [
+   {
+    "class": "android.view.ViewGroup",
+    "bounds": {
+     "left": 0,
+     "top": 0,
+     "right": 1080,
+     "bottom": 2400
+    },
+    "children": [
+     {
+      "text": "फ़ोन",
+      "desc": "फ़ोन",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 60,
+       "top": 1600,
+       "right": 280,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "मैसेज",
+      "desc": "मैसेज",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 310,
+       "top": 1600,
+       "right": 530,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "कैमरा",
+      "desc": "कैमरा",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 560,
+       "top": 1600,
+       "right": 780,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "गैलरी",
+      "desc": "गैलरी",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 810,
+       "top": 1600,
+       "right": 1030,
+       "bottom": 1880
+      }
+     },
+     {
+      "text": "सेटिंग्स",
+      "desc": "सेटिंग्स",
+      "class": "android.widget.TextView",
+      "clickable": true,
+      "bounds": {
+       "left": 60,
+       "top": 1900,
+       "right": 280,
+       "bottom": 2180
+      }
+     }
+    ]
+   }
+  ]
+ }
+}

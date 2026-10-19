@@ -1,0 +1,162 @@
+{
+ "package": "com.android.settings",
+ "root": {
+  "class": "android.widget.FrameLayout",
+  "bounds": {
+   "left": 0,
+   "top": 0,
+   "right": 1080,
+   "bottom": 2400
+  },
+  "children": [
+   {
+    "class": "androidx.recyclerview.widget.RecyclerView",
+    "scrollable": true,
+    "bounds": {
+     "left": 0,
+     "top": 300,
+     "right": 1080,
+     "bottom": 2400
+    },
+    "children": [
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 300,
+       "right": 1080,
+       "bottom": 480
+      },
+      "children": [
+       {
+        "text": "Sound & vibration",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 330,
+         "right": 1000,
+         "bottom": 390
+        }
+       },
+       {
+        "text": "Volume, haptics, Do Not Disturb",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 395,
+         "right": 1000,
+         "bottom": 450
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 480,
+       "right": 1080,
+       "bottom": 660
+      },
+      "children": [
+       {
+        "text": "Display & touch",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 510,
+         "right": 1000,
+         "bottom": 570
+        }
+       },
+       {
+        "text": "Dark theme, font size, brightness",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 575,
+         "right": 1000,
+         "bottom": 630
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 660,
+       "right": 1080,
+       "bottom": 840
+      },
+      "children": [
+       {
+        "text": "Wallpaper & style",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 690,
+         "right": 1000,
+         "bottom": 750
+        }
+       },
+       {
+        "text": "Colours, themed icons, app grid",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 755,
+         "right": 1000,
+         "bottom": 810
+        }
+       }
+      ]
+     },
+     {
+      "class": "android.widget.LinearLayout",
+      "clickable": true,
+      "bounds": {
+       "left": 0,
+       "top": 840,
+       "right": 1080,
+       "bottom": 1020
+      },
+      "children": [
+       {
+        "text": "Accessibility",
+        "id": "android:id/title",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 870,
+         "right": 1000,
+         "bottom": 930
+        }
+       },
+       {
+        "text": "Display, interaction, audio",
+        "id": "android:id/summary",
+        "class": "android.widget.TextView",
+        "bounds": {
+         "left": 180,
+         "top": 935,
+         "right": 1000,
+         "bottom": 990
+        }
+       }
+      ]
+     }
+    ]
+   }
+  ]
+ }
+}
