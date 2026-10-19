@@ -1,0 +1,7 @@
+# Never commit secrets
+.env
+*.keystore
+*.jks
+local.properties
+secrets.*
+.DS_Store
