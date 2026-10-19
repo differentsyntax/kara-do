@@ -35,3 +35,6 @@ docs/           website, devlog, decisions, design
 - Engine and recipe tests need only a JDK: `./gradlew :core:recipes:test :core:engine:test`
 - The Android app needs the Android SDK (set `ANDROID_HOME` or `sdk.dir` in `local.properties`): `./gradlew :app:assembleDebug`
 - CI runs both, then `tools/check-privacy.sh`, which fails if the APK gains the internet permission or the accessibility service gains any way to act on the phone.
+
+## Licence
+Code: [Apache-2.0](LICENSE). Recipes and fixtures: [CC BY 4.0](recipes/LICENSE). See [CONTRIBUTING.md](CONTRIBUTING.md).
