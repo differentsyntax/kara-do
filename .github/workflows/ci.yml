@@ -34,3 +34,10 @@ jobs:
       - uses: gradle/actions/setup-gradle@v4
       - run: ./gradlew :app:assembleDebug
       - run: tools/check-privacy.sh app/build/outputs/apk/debug/app-debug.apk
+      # A debug APK to try on an emulator or a test phone. Debug builds are signed with
+      # a throwaway debug key: never give this file to a real user.
+      - uses: actions/upload-artifact@v4
+        with:
+          name: kara-do-debug-apk
+          path: app/build/outputs/apk/debug/app-debug.apk
+          retention-days: 14
